@@ -22,4 +22,6 @@ Misc. Instructions:
 ^ Print A Newline Character
 '{char}' Override Print char
 "{String}" Override Print String
+& Print Current Tape
+$ Print Current Tape With Spaces
 ; End Program

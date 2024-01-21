@@ -14,7 +14,7 @@ public class JScroll {
         //File file = new File(args[0]);
 
         //Pass in a file manually
-        File file = new File("src/dev/lemonjuice/test/test.jscroll");
+        File file = new File("src/dev/lemonjuice/test/fibonacci.jscroll");
 
         //Check that file is a ".jscroll" file
         if(!FileUtil.isValidFileType(file)) ErrorUtil.invalidFileError();
@@ -84,6 +84,19 @@ public class JScroll {
                         System.out.print(characters.get(i));
                         i++;
                     }
+                    break;
+
+                case '&':
+                    for (Integer integer : tape) System.out.print(integer);
+                    break;
+
+                case '$':
+                    for (Integer integer : tape) System.out.print(integer + " ");
+                    break;
+
+                // Whitespace Cases
+                case '\n':
+                case ' ':
                     break;
 
                 case ';':
