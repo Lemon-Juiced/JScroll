@@ -1,5 +1,6 @@
 package dev.lemonjuice.jscroll;
 
+import dev.lemonjuice.jscroll.record.ProgramState;
 import dev.lemonjuice.jscroll.util.ErrorUtil;
 import dev.lemonjuice.jscroll.util.FileUtil;
 import dev.lemonjuice.jscroll.util.TapeUtil;
@@ -27,6 +28,19 @@ public class JScroll {
         for (int i = 0; i <= TapeUtil.getTapeCapacity(characters); i++) tape.add(0);
         int tapePointer = 0;
         int pointerMemory = 0;
+        int loopCount = 0; // This is being set just in case we enter a loop
+
+        //Do the computation
+        ProgramState programState = new ProgramState(tape, tapePointer, pointerMemory, 0);
+        programState = computeLoop(programState, characters);
+    }
+
+    public static ProgramState computeLoop(ProgramState programState, ArrayList<Character> characters){
+        //Simulate the tape
+        ArrayList<Integer> tape = programState.tape();
+        int tapePointer = programState.tapePointer();
+        int pointerMemory = programState.pointerMemory();
+        int loopCount = programState.loopCount();
 
         //Do the computation
         for (int i = 0; i < characters.size(); i++) {
@@ -68,6 +82,11 @@ public class JScroll {
                     System.out.print((char) (tape.get(tapePointer) + '0'));
                     break;
 
+                case '(':
+                    break;
+                case ')':
+                    break;
+
                 case '^':
                     System.out.print('\n');
                     break;
@@ -106,5 +125,9 @@ public class JScroll {
                     ErrorUtil.unexpectedCharacterError(characters.get(i), i);
             }
         }
+
+        // We probably won't reach here, but just in case
+        ProgramState newProgramState = new ProgramState(tape, tapePointer, pointerMemory, loopCount);
+        return newProgramState;
     }
 }

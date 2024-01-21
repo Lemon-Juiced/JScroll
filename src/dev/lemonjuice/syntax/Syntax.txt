@@ -18,6 +18,12 @@ Pointer Print Instructions:
 # Print As Integer
 @ Print As Character
 
+Loop Instructions:
+( Start Loop
+) End Loop
+Syntax ({number_of_iterations},{instructions})
+Example (.,{instructions})
+
 Misc. Instructions:
 ^ Print A Newline Character
 '{char}' Override Print char
