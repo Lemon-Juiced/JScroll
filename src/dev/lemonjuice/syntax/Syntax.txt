@@ -1,0 +1,25 @@
+JScoll Language Syntax
+
+JScroll is a language based on a "tape", that a pointer scrolls across. The data at the points in this tape can be
+manipulated when the pointer is hovering over them. The data by default at all of these points are saved as an integer.
+
+Pointer Move Instructions:
+< Move Left
+> Move Right
+
+Pointer Interaction Instructions:
++ Increment
+- Decrement
+. Store In Pointer Memory (Default is 0)
+* Add Pointer Memory To Current Pointer Location
+/ Subtract Pointer Memory To Current Pointer Location
+
+Pointer Print Instructions:
+# Print As Integer
+@ Print As Character
+
+Misc. Instructions:
+^ Print A Newline Character
+'{char}' Override Print char
+"{String}" Override Print String
+; End Program
