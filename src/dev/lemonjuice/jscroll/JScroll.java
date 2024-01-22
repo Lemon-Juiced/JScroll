@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import static dev.lemonjuice.jscroll.util.ErrorUtil.loopNestingError;
+import static dev.lemonjuice.jscroll.util.ErrorUtil.zeroLoopError;
+
 public class JScroll {
     public static void main(String[] args) throws FileNotFoundException {
         //Gets the file passed as an argument
@@ -82,7 +85,57 @@ public class JScroll {
                     System.out.print((char) (tape.get(tapePointer) + '0'));
                     break;
 
+                // Loop Cases
                 case '(':
+                    // In this case we know the next characters will be a "%," or a number followed by ',' with possible whitespace
+                    boolean isDerivedFromPointer = false; //Set to false by default
+                    String potentialInteger = ""; //Stores the potential integer being built
+                    i++;
+                    while(characters.get(i) != ','){
+                        if(characters.get(i).equals('%')) isDerivedFromPointer = true;
+                        else potentialInteger += characters.get(i);
+                        i++;
+                    }
+
+                    // Now setting the number of iterations
+                    int numberOfIterations = 0;
+                    if(isDerivedFromPointer) numberOfIterations = pointerMemory;
+                    else numberOfIterations = Integer.parseInt(potentialInteger);
+                    if(numberOfIterations == 0) zeroLoopError();
+
+                    // Get the rest of the loop (we have to be careful with nested loops though)
+                    String loopText="";
+                    int nestLevel = 0; //Set this to 0 by default
+                    boolean runCondition = true; //Controls the following loop
+                    i++;
+                    while(runCondition){
+                        if(characters.get(i).equals('(')) nestLevel++;
+                        if(characters.get(i).equals(')')) {
+                            nestLevel--;
+                            if(nestLevel == 0) runCondition = false;
+                        }
+                        loopText += characters.get(i);
+                        i++;
+                    }
+
+                    //Testing purposes
+                    System.out.println("Number of Iterations: " + numberOfIterations);
+                    System.out.println("Loop Text: " + loopText);
+
+                    //Convert the loopText to the characters needed
+                    /*
+                    ArrayList<Character> loopCharacters = new ArrayList<>();
+                    for (int j = 0; j < loopText.length(); j++) {
+                        loopCharacters.add(loopText.charAt(j));
+                    }
+
+                    //Loop the code block
+                    ProgramState newProgramState = new ProgramState(tape, tapePointer, pointerMemory, 0);
+                    for (int j = 0; j < numberOfIterations; j++) {
+                        newProgramState = computeLoop(newProgramState, loopCharacters);
+                    }
+                    */
+
                     break;
                 case ')':
                     break;

@@ -21,8 +21,9 @@ Pointer Print Instructions:
 Loop Instructions:
 ( Start Loop
 ) End Loop
-Syntax ({number_of_iterations},{instructions})
-Example (.,{instructions})
+% The Value Stored in the Pointer
+Syntax 1 (%,{instructions})
+Syntax 2 ({number_of_iterations},{instructions})
 
 Misc. Instructions:
 ^ Print A Newline Character

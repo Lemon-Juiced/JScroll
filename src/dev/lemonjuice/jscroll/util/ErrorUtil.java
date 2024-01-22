@@ -10,6 +10,24 @@ public class ErrorUtil {
     }
 
     /**
+     * Handles an error for when a loop is nested incorrectly, or does not end.
+     */
+    public static void loopNestingError(){
+        System.err.println("Error: There is a loop nested incorrectly or it does not end.");
+        endProgramWithError();
+    }
+
+    /**
+     * Handles "not a number" errors
+     *
+     * @param nanText The text that is not a number
+     */
+    public static void nanError(String nanText){
+        System.err.println("Error: " + nanText + " is NaN.");
+        endProgramWithError();
+    }
+
+    /**
      * Handles an error for when the pointer goes "out of bounds"
      */
     public static void outOfBoundsError(){
@@ -27,6 +45,15 @@ public class ErrorUtil {
         System.err.println("Error: Unexpected character \'" + unexpectedCharacter + "\' found at: " + location);
         endProgramWithError();
     }
+
+    /**
+     * Handles an error, where a loop is set to run zero times.
+     */
+    public static void zeroLoopError(){
+        System.err.println("Error: A loop is set to run zero times");
+        endProgramWithError();
+    }
+
 
     /**
      * Ends a program when an error is thrown if desired.
